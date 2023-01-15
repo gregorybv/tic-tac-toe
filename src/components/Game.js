@@ -61,9 +61,12 @@ export default function Game() {
   })
 
   return (
-    <div className="game">
+    <div className={winner?"game disabled":"game"}>
       <div className="game-board">
-        <Board onClick={(i) => handleClick(i)} squares={current.squares}></Board>
+        <Board
+          onClick={(i) => handleClick(i)}
+          squares={current.squares}>
+        </Board>
       </div>
       <div className="game-info">
         <div>{status}</div>
@@ -85,7 +88,7 @@ const calculateWinner = (squares) => {
   ]
   let isDraw = true
   for (let i = 0; i < winnerLines.length; i++) {
-    const [a,b,c] = winnerLines[i]
+    const [a, b, c] = winnerLines[i]
     if (squares[a] && squares[a] === squares[b] && squares[b] === squares[c]) {
       return squares[a]
     }
